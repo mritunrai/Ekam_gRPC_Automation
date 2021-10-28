@@ -1,5 +1,6 @@
 package ekam.example.api.client;
 
+import com.examples.bookstore.BookAuthorRequest;
 import com.examples.bookstore.BookResponse;
 import com.examples.bookstore.BookServiceGrpc;
 import com.examples.bookstore.GetBookRequest;
@@ -37,5 +38,11 @@ public class GrpcClient {
     BookResponse getBookByISBN(@GrpcRequest GetBookRequest getBookRequest) {
 
         return bookServiceStub.getBook(getBookRequest);
+    }
+
+    @APIStep(keyword = "When", description = "I invoke getBookRequest call")
+    public @GrpcResponse
+    BookResponse getBookByAuthor(@GrpcRequest BookAuthorRequest bookAuthorRequest) {
+        return bookServiceStub.getBooksViaAuthor(bookAuthorRequest);
     }
 }

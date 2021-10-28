@@ -1,5 +1,6 @@
 package ekam.example.api.tests;
 
+import com.examples.bookstore.BookAuthorRequest;
 import com.examples.bookstore.BookResponse;
 import com.examples.bookstore.GetBookRequest;
 import com.google.inject.Inject;
@@ -27,15 +28,15 @@ public class BookTests extends APITest {
         Assert.assertEquals(bookResponse.getResponseCode(), "200");
     }
 
-//    @Test(groups = "api")
-//    public void getAuthorTests() {
-//        String author = bookDataClient.getBook().getAuthor();
-//
-//        GetBookRequest getBookRequest = GetBookRequest.newBuilder().se.build();
-//
-//        BookResponse bookResponse = Client(GrpcClient.class)
-//                .getBookByISBN(getBookRequest);
-//
-//        Assert.assertEquals(bookResponse.getResponseCode(), "200");
-//    }
+    @Test(groups = "api")
+    public void getAuthorTests() {
+        String author = bookDataClient.getBook().getAuthor();
+
+        BookAuthorRequest bookAuthorRequest = BookAuthorRequest.newBuilder().setAuthor(author).build();
+
+        BookResponse bookResponse = Client(GrpcClient.class)
+                .getBookByAuthor(bookAuthorRequest);
+
+        Assert.assertEquals(bookResponse.getResponseCode(), "200");
+    }
 }
